@@ -1,5 +1,5 @@
 import express from 'express'
-import todos from '.todos.js'; //uvoz todos.js
+import todos from './todos.js'; //uvoz todos.js
 
 const app = express()
 
@@ -28,10 +28,10 @@ app.get("/api/todos",(req,res)=>{
     res.status(200).json(todoList);
 });
 app.put("/api/todos/:id",(req,res)=>{
-    const {id}=req.params; 
+    const {id}=req.params;
     const index=todoList.findIndex((t)=>t.id===id);
     if(index===-1){
-        res.status(404).json({message:"Todo not found"})
+        return res.status(404).json({message:"Todo not found"});
     }
     //PUT mijenja cijeli objekt, zadržava se ID, ostalo se mijenja
     todoList[index]={

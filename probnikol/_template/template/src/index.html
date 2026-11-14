@@ -16,14 +16,46 @@
 <body>
     <nav class="navbar bg-success navbar-dark shadow mb-4">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-white" href="#">
+            <a class="navbar-brand d-flex align-items-center gap-2 text-white fw-bold" href="#">
                 <i class="bi bi-stack text-warning"></i>
-                <span>TaskManager</span> <!--naslov aplikacije -->
+                <span>TaskProgress</span> <!--naslov aplikacije -->
             </a>
         </div> <!-- obrisi <a another, home bla bla-->
     </nav>
 
-    <h2>Index</h2>
-    <button class="btn btn-outline-secondary">Test</button>
+    <!--<h2>Index</h2>
+    <button class="btn btn-outline-secondary">Test</button>-->
+
+    <!--2.zad-->
+    <div class="container mb-4">
+         <!-- Responzivni grid: xs 1 kartica, sm i md 2 kartice, lg+ 3 kartice; g-4 razmak između kartica -->
+        <!-- Responzivni grid (row-cols za različite širine ekrana + razmaci g-4)-->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4" id="todos-container">
+            <!-- PROTOTIP KARTICE -->
+            <div class="col">
+                <!-- Kartica s klasom za zaobljenost (rounded-4), sjenom i bijelom pozadinom-->
+                <div class="card shadow-sm rounded-4 border h-100">
+                    <div class="card-body d-flex flex-column">
+                        <!--fw-bold --> 
+                        <h5 class="card-title mb-2">Buy groceries</h5>
+                        <p class="card-text mb-2">
+                            <strong>When:</strong> 12/4/2023
+                        </p>
+                        <!--status (uz tražene ikone x-circle-fill / check-circle-fill) -->
+                        <p class="card-text mb-3">
+                            <strong>Status:</strong> <i class="bi bi-x-circle-fill text-danger"></i>
+                        </p>
+                          <!-- Gumbovi: do md jedan ispod drugoga, od md u redu s većim razmakom -->
+                        <div class="d-flex flex-column flex-md-row gap-2 gap-md-4 mt-auto">
+                            <button class="btn btn-light border flex-grow-1 rounded-pill">Toggle</button>
+                            <button class="btn btn-light border flex-grow-1 rounded-pill">Remove</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </body>
 </html>
