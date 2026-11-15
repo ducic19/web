@@ -1,0 +1,30 @@
+// ============================================================
+//  styles.scss — prilagodba Bootstrapa
+//  ZADATAK 1: primarna boja, Bootstrap Icons, font Kanit
+// ============================================================
+
+// ZADATAK 1 (1 bod) — primarna boja #3e5eaf.
+// MORA biti definirana PRIJE uvoza Bootstrapa kako bi Bootstrap
+// generirao bg-primary, btn-primary, text-primary itd. s tom
+// vrijednošću. Da je uvoz prvi, promjena ne bi djelovala.
+$primary: #3e5eaf;
+
+@import "bootstrap/scss/bootstrap";
+
+
+// ZADATAK 1 (1 bod) — Bootstrap Icons dodan preko npm-a.
+// Update the import directory to point to it‘s location within node_modules
+// Prvo se pokaže gdje su fontovi unutar node_modules, pa se uveze
+// Sass datoteka ikona. Bez prve linije ikone bi bile prazni kvadratići.
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+
+// Import the Sass files as usual
+@import "bootstrap-icons/font/bootstrap-icons";
+
+// ZADATAK 1 (2 boda) — font Kanit s Google Fontsa + primjena na body.
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  font-family: "Kanit", sans-serif;
+  font-style: normal;    
+}

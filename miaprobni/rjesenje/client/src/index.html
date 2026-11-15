@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Bootstrap</title>
+    <!-- Ulazna točka klijenta: main.js uvozi SCSS, Bootstrap i script.js -->
+    <script type="module" src="./js/main.js"></script>
+</head>
+<body>
+  <!-- ============================================================
+       ZADATAK 1 (5 bodova) — navigacijska traka
+       Stil je dobiven ISKLJUČIVO Bootstrap klasama:
+         navbar / navbar-expand-lg → osnovna navigacija
+         bg-primary                → plava boja (#3e5eaf iz styles.scss)
+         container                 → centrirana širina
+         navbar-brand              → natpis brenda
+         bi bi-table               → tražena "table" ikona
+         text-warning              → žuta ikona na plavoj podlozi
+         me-2                      → razmak ikone od teksta
+         text-white + strong       → bijeli podebljani natpis "Todo App"
+       ============================================================ -->
+  <nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container">
+      <a class="navbar-brand " href="#"><i class="bi bi-table text-warning me-2"></i> <strong class="text-white">Todo App</strong></a>
+    </div>
+  </nav>  
+
+    <!-- ============================================================
+         ZADATAK 1 (3 boda) — tablica
+         table table-hover → Bootstrap stil i hover na retku
+         mt-5              → odmak od navigacije
+         id="todoTable"    → selektor koji koristi renderTableRows()
+         text-center na "Completed" → fusnota 1: sadržaj tog stupca
+                                      mora biti centriran
+         <tbody> je prazan jer ga dinamički puni renderTableRows()
+         ============================================================ -->
+    <div class="container">
+      <table class="table table-hover mt-5" id="todoTable">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Date</th>
+            <th class="text-center">Completed</th>
+            <!-- ZADATAK 2 (1 bod) — stupac "Modify" ide NAKON stupca
+                 "Completed", a njegov je sadržaj centriran. -->
+            <th class="text-center">Modify</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+     
+    <!-- ============================================================
+         ZADATAK 2 (6 bodova) — predložak modala
+         • nalazi se NAKON prikazanog sadržaja (iza tablice)
+         • NEMA naslova: nema .modal-header ni .modal-title
+         • u .modal-body je forma s dvije floating label kontrole
+         • opis     → type="text"
+         • vrijeme  → type="datetime-local"
+         • checkbox → označava je li TODO završen ili ne
+         • id-evi (#description, #date, #completed) odgovaraju
+           imenima polja TODO zapisa iz server/todos.js
+         • gumbi su u .modal-footeru, kao u primjerima iz dokumentacije
+         ============================================================ -->
+    <div class="modal fade" tabindex="-1" id="editModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            
+            <form>
+              <!-- floating label kontrola za opis (type="text") -->
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="description" placeholder="Description">
+                <label for="description">Description</label>
+              </div>
+              <!-- floating label kontrola za vrijeme (type="datetime-local") -->
+              <div class="form-floating mb-3">
+                <input type="datetime-local" class="form-control" id="date" placeholder="Date">
+                <label for="date">Date</label>
+              </div>
+              <!-- checkbox za završenost -->
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="completed">
+                <label class="form-check-label" for="completed">
+                  Completed
+                </label>
+              </div>
+              <!-- ZADATAK 2 — čuvanje id-ja zapisa: skrivena kontrola forme.
+                   openEditModal() ovdje upiše id, a submit() ga pročita. -->
+              <input type="text" name="id" id="id" hidden>                            
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <!-- ZADATAK 2 (1 bod) — "Close" poziva GLOBALNU funkciju hide()
+                 (u script.js: window.hide = hide). -->
+            <button type="button" class="btn btn-secondary" onclick="hide()">Close</button>
+            <!-- ZADATAK 2 (1 bod) — "Save changes" poziva GLOBALNU funkciju
+                 submit() (u script.js: window.submit = submit). -->
+            <button type="button" class="btn btn-primary" onclick="submit()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>      
+
+</body>
+</html>
