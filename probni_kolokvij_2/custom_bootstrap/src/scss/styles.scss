@@ -1,0 +1,13 @@
+$primary: #b91c1c; //dodavanje primarne boje
+$warning: #f2c30a; //dodavanje boje upozorenja
+$success: #139357; //dodavanje boje uspjeha
+@import "bootstrap/scss/bootstrap";
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts"; //bootstrap icons preko npm-a
+@import "bootstrap-icons/font/bootstrap-icons"; // npm install bootstrap-icons
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+body{
+    font-family: 'Rubik', sans-serif;  //dodavanje fonta 
+    font-style: normal;
+    //google fonts rubik -> get font-> import -> copy
+} 

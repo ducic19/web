@@ -1,0 +1,11 @@
+const trips = [
+    { destination: "Pariz", date: "2024-12-02T09:00", visited: true },
+    { destination: "Rim", date: "2024-12-05T07:30", visited: false },
+    { destination: "Lisabon", date: "2024-12-08T11:15", visited: false },
+    { destination: "Beč", date: "2024-12-01T15:00", visited: true },
+    { destination: "Prag", date: "2024-12-11T08:45", visited: false },
+    { destination: "Amsterdam", date: "2024-12-14T10:30", visited: false },
+    { destination: "Barcelona", date: "2024-12-17T12:00", visited: false },
+    { destination: "Budimpešta", date: "2024-12-19T16:20", visited: false },
+    { destination: "Zagreb", date: "2024-12-21T18:00", visited: true }
+];
