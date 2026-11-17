@@ -1,0 +1,31 @@
+// =====================================================================
+// Zadatak 1: prilagodba Bootstrapa
+// Datoteku uvozi main.js, a Vite je preko paketa "sass" prevodi u CSS.
+// =====================================================================
+
+// Font Inter s Google Fonts. CSS @import mora biti na samom POČETKU datoteke.
+// Ovaj redak font samo UČITAVA - postavlja ga pravilo za body na dnu.
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+// ---------------------------------------------------------------------
+// Boje se postavljaju PRIJE uvoza Bootstrapa jer su u Bootstrapu označene
+// s !default ("koristi ovu vrijednost samo ako varijabla već nije zadana").
+// Zadane prije @import-a -> Bootstrap od njih izgradi sve klase
+// (text-primary, text-bg-primary, btn-outline-success, text-bg-warning...).
+// Accordion također koristi $primary za boju otvorenog zaglavlja.
+// ---------------------------------------------------------------------
+$primary: #4338ca;   // indigo
+$success: #16a34a;   // zelena - položeni ispiti
+$warning: #f59e0b;   // žuta - ispiti na čekanju
+
+@import "bootstrap/scss/bootstrap";
+
+// Bootstrap Icons (npm install bootstrap-icons) - Sass verziji treba reći
+// gdje su datoteke fonta, inače se umjesto ikona prikažu prazni kvadratići.
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+@import "bootstrap-icons/font/bootstrap-icons";
+
+// Font se postavlja običnim CSS pravilom (kao na vježbama).
+body {
+  font-family: "Inter", sans-serif;
+}

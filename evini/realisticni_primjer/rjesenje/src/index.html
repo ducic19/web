@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- viewport: bez ovoga mobitel prikaže "desktop" stranicu i responzivne klase ne rade -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieNight</title>
+    <!-- type="module": omogućuje "import" u JS-u; skripta se izvršava nakon učitavanja HTML-a -->
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/script.js"></script>
+</head>
+<body>
+    <!-- =================================================================
+         Zadatak 1: navigacijska traka
+         - bg-primary: narančasta pozadina (naša $primary boja)
+         - data-bs-theme="dark": Bootstrap zna da je pozadina tamna pa
+           navbar-brand dobije SVIJETLI tekst (inače bi bio taman)
+         - shadow: sjena ispod trake
+         - sticky-top: traka ostaje na vrhu pri pomicanju stranice
+         ================================================================= -->
+    <nav class="navbar bg-primary shadow sticky-top" data-bs-theme="dark">
+        <!-- container: sadržaj poravnat s ostatkom stranice. .navbar je već flex
+             s razmakom između elemenata, pa brand ide lijevo, a značka desno. -->
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="./index.html">
+                <!-- text-warning: žuta ikona; me-2: razmak do teksta -->
+                <i class="bi bi-film text-warning me-2"></i>MovieNight
+            </a>
+            <!-- Zadatak 3 popunjava ovaj brojač ("4 / 9 watched").
+                 text-bg-light: svijetla pozadina s automatski tamnim tekstom -->
+            <span class="badge rounded-pill text-bg-light fs-6" id="counter">0 / 0 watched</span>
+        </div>
+    </nav>
+
+    <!-- py-4: razmak gore i dolje -->
+    <main class="container py-4">
+        <!-- =============================================================
+             Zadatak 2: filteri (Bootstrap nav-pills)
+             nav nav-pills: gumbi u obliku "pilula"; aktivni ima klasu active
+             (pozadina u primarnoj boji).
+             justify-content-center: na malim zaslonima filteri su centrirani,
+             justify-content-md-start: od md (768px) poravnati lijevo.
+             data-filter: vrijednost koju JS čita da zna koji je filter odabran.
+             ============================================================= -->
+        <ul class="nav nav-pills justify-content-center justify-content-md-start gap-2 mb-4">
+            <li class="nav-item">
+                <button type="button" class="nav-link active" data-filter="all">All</button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="nav-link" data-filter="towatch">
+                    <i class="bi bi-eye-slash me-1"></i>To watch
+                </button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="nav-link" data-filter="watched">
+                    <i class="bi bi-eye-fill me-1"></i>Watched
+                </button>
+            </li>
+        </ul>
+
+        <!-- Zadatak 2: prototip kartice (zakomentiran nakon izrade, HTML kopiran u createCard)
+        <div class="row g-4">
+            col-12 / col-md-6 / col-lg-4: 1 kartica u retku na mobitelu, 2 od md, 3 od lg
+            <div class="col-12 col-md-6 col-lg-4">
+                h-100: sve kartice u retku jednake visine; border-success: zeleni obrub (odgledan)
+                <div class="card h-100 shadow-sm border-success">
+                    zaglavlje: status lijevo, žanr desno; text-bg-success = zelena pozadina + bijeli tekst
+                    <div class="card-header d-flex justify-content-between align-items-center text-bg-success">
+                        <span><i class="bi bi-eye-fill me-1"></i>Watched</span>
+                        <span class="badge rounded-pill text-bg-light">Sci-Fi</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-1">Interstellar</h5>
+                        <p class="small text-body-secondary mb-2">2014</p>
+                        text-warning: žute zvjezdice; 5 ikona - pune (star-fill) do ocjene, ostale prazne (star)
+                        <div class="text-warning">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                        </div>
+                    </div>
+                    bg-transparent: podnožje bez sive pozadine; flex-fill: prvi gumb zauzme preostali prostor
+                    <div class="card-footer bg-transparent d-flex gap-2">
+                        <button type="button" class="btn btn-sm btn-outline-primary flex-fill">Mark as unwatched</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash3"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+
+        <!-- Zadatak 3: prazan "okvir" - renderMovies ga puni karticama -->
+        <div class="row g-4" id="movies"></div>
+    </main>
+</body>
+</html>

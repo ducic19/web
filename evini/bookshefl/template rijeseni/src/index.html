@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookShelf</title>
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/script.js"></script>
+</head>
+
+<body>
+    <nav class="navbar sticky-top bg-primary shadow-sm">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="#">
+                <i class="bi bi-book-half text-warning me-1"></i> BookShelf
+            </a>
+            <span id="count" class="badge rounded-pill bg-white text-primary fs-6">0 books</span>
+        </div>
+    </nav>
+
+
+
+
+<main class="container py-4">
+    <div class="d-flex flex-column flex-sm-row justify-content-between gap-2 mb-3">
+        <div class="btn-group">
+            <button class="btn btn-outline-primary active js-filter" data-filter="all">All</button>
+            <button class="btn btn-outline-primary js-filter" data-filter="false">To read</button>
+            <button class="btn btn-outline-primary js-filter" data-filter="true">Read</button>
+        </div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                <i class="bi bi-plus-lg me-1"></i>New book
+            </button>
+    </div>
+
+    <div class="mb-4">
+        <div class="d-flex justify-content-between align-items-start gap-2">
+            <span class="small text-secondary">Reading progress</span>
+            <span class="small text-secondary" id="progress-text">0 / 0</span>
+        </div>
+        <div class="progress" role="progressbar" style="height: 0.6rem">
+            <div class="progress-bar  bg-success" id="progress-bar" style="width: 0% "></div>
+        </div>
+    </div>
+
+
+    <!--
+    <div>
+        <div class="row g-4">
+            <div class="col-12 col-sm-6 col-lg-4 col-xxl-3">
+                <div class="card h-100 shadow-sm border-0 rounded-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start gap-2">
+                            <div>
+                                <h5 class="card-title">
+                                    The Hobbit       
+                                </h5>
+                                <p class="fst-italic text-secondary">J. R. R. Tolkien</p>
+                            </div>
+                            <span class="badge rounded-pill bg-success text-black">
+                                    <i class="bi bi-bookmark-check-fill text-black"></i> Read</span>
+                        </div>
+                        <div>
+                            <ul class="list-unstyled small mb-0">
+                                <li><i class="bi bi-file-earmark-text me-1"></i>310 pages</li>
+                                <li><i class="bi bi-calendar-event me-1"></i>Added: 12. 11. 2026.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="d-flex card-footer bg-transparent border-0 pb-3 gap-2">
+                        <button class="btn btn-sm btn-outline-secondary flex-fill">Mark as unread</button>
+                        <button class="btn btn-sm btn-outline-danger">
+                            <i class="bi bi-trash3"></i>
+                        </button>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </div>   
+    -->
+
+    <!-- Zadatak 3: dinamički renderirane kartice -->
+    <div class="row g-3" id="books"></div>
+
+</main>
+<!-- Zadatak 4: modal s formom za novu knjigu -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="add-form" novalidate>
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="addModalLabel">New book</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                            <label for="title">Title</label>
+                            <div class="invalid-feedback">Title is required.</div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="author" name="author" placeholder="Author">
+                            <label for="author">Author</label>
+                            <div class="invalid-feedback">Author is required.</div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="pages" name="pages" placeholder="Pages" min="1">
+                            <label for="pages">Pages</label>
+                            <div class="invalid-feedback">Pages must be a positive number.</div>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="read" name="read">
+                            <label class="form-check-label" for="read">Already read</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add book</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

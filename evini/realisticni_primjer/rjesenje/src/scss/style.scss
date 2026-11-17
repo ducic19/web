@@ -1,0 +1,37 @@
+// =====================================================================
+// Zadatak 1: prilagodba Bootstrapa
+// Datoteku uvozi main.js, a Vite je preko paketa "sass" prevodi u CSS.
+// =====================================================================
+
+// Font Poppins s Google Fonts.
+// CSS @import mora biti na samom POČETKU datoteke. Ovaj redak font samo
+// UČITAVA - postavlja ga pravilo za body na dnu datoteke.
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+// ---------------------------------------------------------------------
+// Boje se postavljaju PRIJE uvoza Bootstrapa.
+// U Bootstrapu su varijable označene s !default (npr. $primary: $blue !default;),
+// što znači "koristi ovu vrijednost samo ako varijabla već nije zadana".
+// Ako ih zadamo prije @import-a, Bootstrap od njih izgradi sve klase
+// (bg-primary, btn-outline-primary, border-success, text-bg-success...).
+// Poslije @import-a promjena više nema učinka.
+// ---------------------------------------------------------------------
+$primary: #c2410c;   // tamnonarančasta - navigacija, aktivni filter, gumbi
+$success: #15803d;   // zelena - zaglavlje i obrub odgledanih filmova
+$warning: #f59e0b;   // žuta - zvjezdice (text-warning)
+
+@import "bootstrap/scss/bootstrap";
+
+// ---------------------------------------------------------------------
+// Bootstrap Icons (npm install bootstrap-icons) - prema dokumentaciji
+// Sass verziji treba reći gdje su datoteke fonta s ikonama, inače se
+// umjesto ikona prikažu prazni kvadratići.
+// ---------------------------------------------------------------------
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+@import "bootstrap-icons/font/bootstrap-icons";
+
+// Font se postavlja običnim CSS pravilom (kao na vježbama).
+// "sans-serif" je rezervni font ako se Poppins ne učita.
+body {
+  font-family: "Poppins", sans-serif;
+}

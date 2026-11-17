@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- viewport: bez ovoga mobitel prikaže "desktop" stranicu i responzivne klase ne rade -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExamTracker</title>
+    <!-- type="module": omogućuje "import" u JS-u; izvršava se nakon učitavanja HTML-a -->
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/script.js"></script>
+</head>
+<body>
+    <!-- =================================================================
+         Zadatak 1: SVIJETLA navigacijska traka
+         - bg-body: bijela pozadina (boja pozadine stranice)
+         - border-bottom: tanka linija ispod trake
+         - shadow-sm: mala sjena
+         Na svijetloj traci ne treba data-bs-theme - tekst je ionako taman.
+         ================================================================= -->
+    <nav class="navbar bg-body border-bottom shadow-sm">
+        <div class="container">
+            <!-- text-primary: naziv i ikona u primarnoj (indigo) boji -->
+            <a class="navbar-brand fw-bold text-primary" href="./index.html">
+                <i class="bi bi-mortarboard-fill me-2"></i>ExamTracker
+            </a>
+            <!-- Zadatak 3 upisuje zbroj ECTS bodova ("ECTS 11 / 32").
+                 text-bg-primary: indigo pozadina s automatski bijelim tekstom -->
+            <span class="badge rounded-pill text-bg-primary fs-6" id="ects">ECTS 0 / 0</span>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        <!-- =============================================================
+             Zadatak 2: sadržaj u središnjem stupcu
+             col-12: na manjim zaslonima cijela širina.
+             col-lg-8 offset-lg-2: od lg (992px) stupac je 8/12 širine i
+             pomaknut za 2/12 udesno -> centriran (2 + 8 + 2 = 12).
+             ============================================================= -->
+        <div class="row">
+            <div class="col-12 col-lg-8 offset-lg-2">
+
+                <!-- Naslov i broj ispita u istom retku: naslov lijevo, broj desno.
+                     align-items-baseline: tekstovi različite veličine poravnati po liniji teksta -->
+                <div class="d-flex justify-content-between align-items-baseline mb-3">
+                    <h1 class="h3 mb-0">My exams</h1>
+                    <!-- Zadatak 3 upisuje broj ispita -->
+                    <span class="text-body-secondary" id="count">0 exams</span>
+                </div>
+
+                <!-- Zadatak 2: prototip jedne stavke accordiona (zakomentiran nakon izrade,
+                     HTML kopiran u createItem u script.js)
+                <div class="accordion shadow-sm">
+                    accordion-item: jedna stavka (zaglavlje + sadržaj koji se otvara)
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            accordion-button + collapsed: zatvorena stavka (strelica prema dolje)
+                            data-bs-toggle="collapse": Bootstrap JS otvara/zatvara element
+                            data-bs-target="#collapse-1": KOJI element - mora odgovarati id-ju ispod
+                            gap-2: razmak između naslova i značke
+                            <button class="accordion-button collapsed gap-2" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapse-1">
+                                flex-grow-1: naslov zauzme sav slobodan prostor pa je značka uz strelicu
+                                (ms-auto na znački NE radi: Bootstrapova strelica ::after već ima
+                                margin-left: auto, pa bi se prostor podijelio i značka bi "lebdjela")
+                                <span class="fw-semibold flex-grow-1">Web Programming</span>
+                                me-2: razmak između značke i strelice
+                                <span class="badge rounded-pill text-bg-warning me-2">
+                                    <i class="bi bi-hourglass-split me-1"></i>Pending
+                                </span>
+                            </button>
+                        </h2>
+                        id="collapse-1": cilj iz data-bs-target; accordion-collapse collapse = skriveno
+                        <div id="collapse-1" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                3 podatka: jedan ispod drugog na xs (col-12), u jednom retku od md (col-md-4)
+                                <div class="row g-2 small mb-3">
+                                    <div class="col-12 col-md-4"><i class="bi bi-calendar-event text-primary me-1"></i>petak, 20. studenoga 2026.</div>
+                                    <div class="col-12 col-md-4"><i class="bi bi-person text-primary me-1"></i>Dr. Ana Horvat</div>
+                                    <div class="col-12 col-md-4"><i class="bi bi-award text-primary me-1"></i>6 ECTS</div>
+                                </div>
+                                gumbi lijevo, "in 4 days" desno
+                                <div class="d-flex align-items-center gap-2">
+                                    <button type="button" class="btn btn-sm btn-outline-success">Mark as passed</button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash3"></i></button>
+                                    <span class="small text-primary ms-auto">in 4 days</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                -->
+
+                <!-- Zadatak 3: prazan accordion - renderExams ga puni stavkama -->
+                <div class="accordion shadow-sm" id="exams"></div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+// =====================================================================
+// Zadatak 1: prilagodba Bootstrapa preko Sass varijabli
+// Ova datoteka se uvozi u main.js ("import '../scss/style.scss'"), a Vite je
+// preko paketa "sass" prevodi u običan CSS.
+// =====================================================================
+
+// Font Nunito s Google Fonts.
+// @import url(...) je obični CSS import i mora biti na samom POČETKU
+// prevedenog CSS-a - zato je prvi redak. Samo učitava font, ne postavlja ga.
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..800;1,400..800&display=swap");
+
+// ---------------------------------------------------------------------
+// Varijable se postavljaju PRIJE uvoza Bootstrapa.
+// U Bootstrapu su definirane s !default, npr.  $primary: $blue !default;
+// !default znači "postavi ovu vrijednost SAMO ako varijabla još ne postoji".
+// Ako ih mi postavimo prije, Bootstrap zadrži naše vrijednosti i iz njih
+// izgradi sve klase (btn-primary, text-primary, bg-primary-subtle, ...).
+// Ako ih postavimo POSLIJE @import-a, Bootstrap je već sve izgradio sa
+// starim vrijednostima i promjena nema učinka.
+// Sve dostupne varijable: node_modules/bootstrap/scss/_variables.scss
+// ---------------------------------------------------------------------
+
+// Primarna boja (tirkizno-zelena) - mijenja sve "primary" klase.
+$primary: #0f766e;
+
+// Boja pozadine cijele stranice (<body>). Bootstrap je postavlja preko
+// CSS varijable --bs-body-bg.
+$body-bg: #f1f5f4;
+
+// Zadani radijus zaobljenja - utječe na kartice, gumbe, inpute, list-group...
+// (rounded-3 itd. imaju svoje vrijednosti i nisu pod utjecajem ove varijable.)
+$border-radius: 0.75rem;
+
+// Font postavljen preko Bootstrap varijable, a ne pravilom body { font-family }.
+// Bootstrap ovu varijablu koristi za --bs-body-font-family, pa font dobiju
+// body i svi elementi koji nasljeđuju font (forme, gumbi...).
+// "sans-serif" je rezervni font ako se Nunito ne učita.
+$font-family-sans-serif: "Nunito", sans-serif;
+
+// Uvoz cijelog Bootstrapa (SCSS izvor iz node_modules) - sad s našim varijablama.
+@import "bootstrap/scss/bootstrap";
+
+// ---------------------------------------------------------------------
+// Bootstrap Icons, instaliran s "npm install bootstrap-icons".
+// Prema dokumentaciji, Sass verzija treba znati gdje su datoteke fonta
+// s ikonama - inače bi tražila mapu "./fonts" pored style.scss i ikone bi
+// se prikazale kao prazni kvadratići.
+// ---------------------------------------------------------------------
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+@import "bootstrap-icons/font/bootstrap-icons";

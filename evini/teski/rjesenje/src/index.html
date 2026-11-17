@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- viewport: bez ovoga mobitel prikaže stranicu kao na desktopu (sitno),
+         pa Bootstrapove responzivne klase (col-sm-, col-lg- ...) ne bi radile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendWise</title>
+    <!-- type="module": omogućuje "import" u JS datotekama. Module skripte se
+         izvršavaju tek kad je HTML učitan, pa elementi već postoje kad ih JS traži. -->
+    <script type="module" src="./js/main.js"></script>   <!-- stilovi + Bootstrap JS -->
+    <script type="module" src="./js/script.js"></script> <!-- logika aplikacije -->
+</head>
+<body>
+    <!-- =================================================================
+         Zadatak 1: navigacijska traka
+         - bg-dark: tamna pozadina
+         - data-bs-theme="dark": kaže Bootstrapu da je traka tamna, pa
+           navbar-brand i navbar-text automatski dobiju SVIJETLU boju teksta
+           (bez toga bi tekst bio taman na tamnoj pozadini)
+         - border-bottom border-4 border-primary: samo donji obrub,
+           debljine 4px, u primarnoj boji
+         ================================================================= -->
+    <nav class="navbar bg-dark border-bottom border-4 border-primary" data-bs-theme="dark">
+        <!-- container: sadržaj trake poravnat je s ostatkom stranice;
+             navbar unutar sebe već koristi flex i justify-content-between,
+             pa brand ide lijevo, a navbar-text desno -->
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="./index.html">
+                <!-- me-2 = margin-end: razmak između ikone i teksta -->
+                <i class="bi bi-wallet2 text-primary me-2"></i>SpendWise
+            </a>
+            <!-- d-none: skriveno na svim širinama...
+                 d-sm-inline: ...a od sm (576px) naviše ponovno vidljivo.
+                 Bootstrap klase vrijede "od te širine naviše" (mobile first). -->
+            <span class="navbar-text d-none d-sm-inline">Personal budget</span>
+        </div>
+    </nav>
+
+    <!-- py-4: razmak gore i dolje (padding-y) -->
+    <main class="container py-4">
+        <!-- =============================================================
+             Zadatak 2: dvostupčani raspored
+             row + col: Bootstrapov grid od 12 stupaca.
+             col-12: na malim zaslonima svaki stupac zauzima cijeli redak
+             (forma iznad, popis ispod).
+             col-lg-4 / col-lg-8: od lg (992px) forma zauzima 4/12 (trećinu),
+             a ostatak 8/12 (dvije trećine) i stoje jedno pored drugog.
+             g-4: razmak (gutter) između stupaca i redaka.
+             ============================================================= -->
+        <div class="row g-4">
+
+            <!-- ===== Lijevi stupac: forma ===== -->
+            <div class="col-12 col-lg-4">
+                <!-- border-0: kartica bez obruba, shadow-sm: mala sjena -->
+                <div class="card border-0 shadow-sm">
+                    <!-- p-4: veći unutarnji razmak od zadanog -->
+                    <div class="card-body p-4">
+                        <!-- id="form-title": JS mijenja naslov u "Edit expense" pri uređivanju -->
+                        <h5 class="card-title mb-3" id="form-title">
+                            <i class="bi bi-plus-circle text-primary me-2"></i>New expense
+                        </h5>
+
+                        <!-- novalidate: isključuje ugrađenu validaciju preglednika
+                             (oblačići "Please fill out this field"), jer validaciju radimo
+                             sami s Bootstrap klasama (Zadatak 4). -->
+                        <form id="expense-form" novalidate>
+                            <!-- mb-3: razmak ispod svake grupe polja -->
+                            <div class="mb-3">
+                                <!-- for="title" povezuje label s inputom id="title":
+                                     klik na tekst stavi fokus u polje -->
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="title" placeholder="e.g. Groceries">
+                                <!-- Bootstrap prikazuje .invalid-feedback samo kad polje
+                                     ispred njega ima klasu is-invalid (dodaje je JS) -->
+                                <div class="invalid-feedback">Title is required.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="amount" class="form-label">Amount</label>
+                                <!-- input-group: input i "€" spojeni u jednu kontrolu.
+                                     has-validation: bez ove klase input-group bi zaobljao
+                                     rubove pogrešno jer je .invalid-feedback zadnji element.
+                                     Zato je .invalid-feedback UNUTAR grupe, kao zadnji. -->
+                                <div class="input-group has-validation">
+                                    <!-- step="0.01": strelice i tipkovnica dopuštaju centa -->
+                                    <input type="number" class="form-control" id="amount" step="0.01" min="0.01" placeholder="0.00">
+                                    <span class="input-group-text">€</span>
+                                    <div class="invalid-feedback">Amount must be greater than 0.</div>
+                                </div>
+                            </div>
+
+                            <!-- Ugniježđeni grid: kategorija i datum u istom retku,
+                                 svaki col-6 (pola širine) na SVIM širinama.
+                                 g-2: manji razmak između njih, mb-4: razmak do gumba -->
+                            <div class="row g-2 mb-4">
+                                <div class="col-6">
+                                    <label for="category" class="form-label">Category</label>
+                                    <!-- form-select: Bootstrap stil za <select> -->
+                                    <select class="form-select" id="category">
+                                        <!-- value="" omogućuje validaciji da prepozna
+                                             da kategorija NIJE odabrana -->
+                                        <option value="" selected>Choose...</option>
+                                        <option value="food">Food</option>
+                                        <option value="transport">Transport</option>
+                                        <option value="bills">Bills</option>
+                                        <option value="fun">Fun</option>
+                                    </select>
+                                    <div class="invalid-feedback">Pick a category.</div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="date" class="form-label">Date</label>
+                                    <!-- type="date": vrijednost je uvijek u obliku YYYY-MM-DD,
+                                         neovisno o tome kako je preglednik prikazuje -->
+                                    <input type="date" class="form-control" id="date">
+                                    <div class="invalid-feedback">Date is required.</div>
+                                </div>
+                            </div>
+
+                            <!-- d-grid: gumbi se rastegnu na punu širinu i stoje
+                                 jedan ispod drugog; gap-2 je razmak između njih -->
+                            <div class="d-grid gap-2">
+                                <!-- type="submit": klik (ili Enter u polju) okida "submit"
+                                     događaj forme koji obrađuje saveExpense u script.js -->
+                                <button type="submit" class="btn btn-primary" id="submit-btn">Add expense</button>
+                                <!-- type="button": NE šalje formu.
+                                     d-none: inicijalno skriven, JS ga prikaže u načinu uređivanja -->
+                                <button type="button" class="btn btn-outline-secondary d-none" id="cancel-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== Desni stupac: statistika, alatna traka i popis ===== -->
+            <div class="col-12 col-lg-8">
+
+                <!-- =========================================================
+                     Zadatak 2: tri kartice sa statistikom
+                     col-12: na xs jedna ispod druge; col-sm-4: od sm sve tri
+                     u retku (3 x 4 = 12).
+                     h-100: kartica zauzme punu visinu stupca, pa su sve tri
+                     jednako visoke čak i kad je sadržaj različit.
+                     mb-4: razmak do alatne trake.
+                     ========================================================= -->
+                <div class="row g-3 mb-4">
+                    <div class="col-12 col-sm-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <!-- small + text-body-secondary: sitan, prigušen opis -->
+                                <div class="small text-body-secondary"><i class="bi bi-cash-stack me-1"></i>Total spent</div>
+                                <!-- fs-4: velika vrijednost; id-jeve popunjava loadSummary -->
+                                <div class="fs-4 fw-bold text-primary" id="total">0,00 €</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <div class="small text-body-secondary"><i class="bi bi-list-ol me-1"></i>Entries</div>
+                                <div class="fs-4 fw-bold" id="count">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <div class="small text-body-secondary"><i class="bi bi-trophy me-1"></i>Top category</div>
+                                <div class="fs-4 fw-bold" id="top">–</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =========================================================
+                     Zadatak 2: alatna traka
+                     Pretraga: col-12 (cijeli redak) do md, col-md-6 (pola) od md.
+                     Selectovi: col-6 (pola) do md, col-md-3 (četvrtina) od md.
+                     Do md: 12 | 6 + 6 -> dva retka. Od md: 6 + 3 + 3 = 12 -> jedan redak.
+                     ========================================================= -->
+                <div class="row g-2 mb-3">
+                    <div class="col-12 col-md-6">
+                        <!-- input-group: ikona povećala "zalijepljena" uz polje -->
+                        <div class="input-group">
+                            <!-- bg-white: ikona ima bijelu pozadinu kao i polje (zadano je siva) -->
+                            <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                            <!-- type="search": preglednik doda "x" za brisanje teksta -->
+                            <input type="search" class="form-control" id="search" placeholder="Search expenses...">
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <!-- value="" za "All categories" -> getExpenses tada ne šalje category -->
+                        <select class="form-select" id="filter-category">
+                            <option value="">All categories</option>
+                            <option value="food">Food</option>
+                            <option value="transport">Transport</option>
+                            <option value="bills">Bills</option>
+                            <option value="fun">Fun</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <!-- vrijednosti su točno ono što poslužitelj očekuje u ?sort= -->
+                        <select class="form-select" id="sort">
+                            <option value="date">Newest first</option>
+                            <option value="amount">Highest amount</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Zadatak 2: prototip jedne stavke popisa (zakomentiran nakon izrade).
+                     Ovaj HTML je kopiran u createItem u script.js, a konkretne
+                     vrijednosti zamijenjene su s ${...}.
+                <ul class="list-group shadow-sm">
+                    d-flex + align-items-center: dijelovi stavke u jednom retku,
+                    vertikalno centrirani; gap-3: razmak između njih
+                    <li class="list-group-item d-flex align-items-center gap-3 py-3">
+                        badge kao "kvadratić": fs-5 povećava ikonu, p-2 daje prostor oko nje,
+                        rounded-3 zaobljuje rubove; *-subtle je svijetla pozadina,
+                        *-emphasis tamnija boja iste nijanse za ikonu
+                        <span class="badge fs-5 p-2 rounded-3 bg-success-subtle text-success-emphasis">
+                            <i class="bi bi-cart"></i>
+                        </span>
+                        flex-grow-1: zauzima sav slobodan prostor i gura iznos i gumbe udesno
+                        <div class="flex-grow-1">
+                            <div class="fw-semibold">Groceries at Konzum</div>
+                            <div class="small text-body-secondary">02. 11. 2026. · Food</div>
+                        </div>
+                        text-nowrap: iznos se nikad ne prelama u dva retka
+                        <span class="fw-bold text-nowrap">42,35 €</span>
+                        btn-group-sm: manja grupa gumbova spojenih rubovima
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3"></i></button>
+                        </div>
+                    </li>
+                </ul>
+                -->
+
+                <!-- Zadatak 3: prazan popis - renderExpenses ga puni stavkama.
+                     U HTML-u ostaje samo "okvir" s id-jem, a sadržaj stvara JS. -->
+                <ul class="list-group shadow-sm" id="expenses"></ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- =================================================================
+         Zadatak 4: toast za obavijesti
+         toast-container + position-fixed bottom-0 end-0: fiksiran u donjem
+         desnom kutu ekrana (ne pomiče se pri scrollanju). p-3: odmak od ruba.
+         text-bg-dark: tamna pozadina sa svijetlim tekstom.
+         Toast je inicijalno skriven; JS ga prikazuje s toast.show().
+         role="status" + aria-live="polite": čitač ekrana pročita poruku.
+         ================================================================= -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div class="toast align-items-center text-bg-dark border-0" id="toast" role="status" aria-live="polite" aria-atomic="true">
+            <!-- d-flex: tekst lijevo, gumb za zatvaranje desno -->
+            <div class="d-flex">
+                <!-- id="toast-text": showToast ovdje upisuje poruku -->
+                <div class="toast-body" id="toast-text">Saved.</div>
+                <!-- data-bs-dismiss="toast": Bootstrap JS (iz main.js) zatvara toast
+                     bez ikakvog našeg koda. btn-close-white: bijeli "x" na tamnoj podlozi.
+                     m-auto: gumb vertikalno centriran -->
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
